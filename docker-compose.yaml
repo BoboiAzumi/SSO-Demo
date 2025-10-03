@@ -1,0 +1,24 @@
+services:
+  login:
+    build: ./login
+    container_name: login-service
+    ports:
+      - "7001:3000"
+    environment:
+      - SSO_SECRET=mysecret
+
+  a-service:
+    build: ./a-service
+    container_name: a-service
+    ports:
+      - "7002:3000"
+    environment:
+      - SSO_SECRET=mysecret
+
+  b-service:
+    build: ./b-service
+    container_name: b-service
+    ports:
+      - "7003:80"
+    environment:
+      - SSO_SECRET=mysecret
