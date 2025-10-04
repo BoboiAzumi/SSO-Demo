@@ -1,5 +1,6 @@
 import { Hono } from 'hono'
 import { sign } from 'hono/jwt'
+import { serve } from '@hono/node-server'
 
 const app = new Hono()
 const SECRET = process.env.SSO_SECRET || 'mysecret'
@@ -113,3 +114,8 @@ app.get('/signout', (c) => {
 })
 
 export default app
+
+serve({
+    fetch: app.fetch,
+    port: 3000
+})

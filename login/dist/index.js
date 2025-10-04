@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const hono_1 = require("hono");
 const jwt_1 = require("hono/jwt");
+const node_server_1 = require("@hono/node-server");
 const app = new hono_1.Hono();
 const SECRET = process.env.SSO_SECRET || 'mysecret';
 // Helper untuk tampilan
@@ -104,4 +105,8 @@ app.get('/signout', (c) => {
     return c.redirect(`https://${callback}`);
 });
 exports.default = app;
+(0, node_server_1.serve)({
+    fetch: app.fetch,
+    port: 3000
+});
 //# sourceMappingURL=index.js.map
